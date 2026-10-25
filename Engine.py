@@ -59,10 +59,10 @@ def encode(progress,private_key,in_path:Path,out_path:Path,audio_path:Path,w=144
         progress(0.95, "Adding song")
         add_audio(out_pathwo,audio_path,out_path)
         out_pathwo.unlink(missing_ok=True)
+        audio_path.unlink()
     else:
         out_path=out_pathwo
     in_path.unlink()
-    audio_path.unlink()
     progress(1.0,"Done")
     return {"file":str(out_path)}
 
