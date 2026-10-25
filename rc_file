@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -e
+
+# 1. Install Python dependencies from requirements.txt
+if [ -f "requirements.txt" ]; then
+    echo "Installing requirements.txt..."
+    python3 -m pip install --quiet --no-cache-dir -r requirements.txt || true
+fi
+
+# 2. Create a local bin directory
+BIN_DIR="$(pwd)/.bin"
+mkdir -p "$BIN_DIR"
+
+# 3. Download Linux x86_64 static build from BtbN GitHub releases if missing
+if [ ! -f "$BIN_DIR/ffmpeg" ] || [ ! -f "$BIN_DIR/ffprobe" ]; then
+    echo "Fetching static binaries from BtbN GitHub release..."
+    # Grab the master latest Linux64 GPL tarball via GitHub release redirect
+    curl -sL "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-n9.0-latest-linux64-gpl-9.0.tar.xz" \
+
+      | tar -xJ -C "$BIN_DIR" --strip-components=1 --wildcards '*/bin/ffmpeg' '*/bin/ffprobe' 2>/dev/null \
+      || {
+          # Fallback wildcard pattern if archive structure differs
+          curl -sL "https://github.com/BtbN/FFmpeg-Builds/releases/download/latest/ffmpeg-n9.0-latest-linux64-gpl-9.0.tar.xz" \
+
+          | tar -xJ -C "$BIN_DIR" --strip-components=1 --wildcards '*ffmpeg' '*ffprobe' 2>/dev/null || true
+      }
+fi
+
+# Move binaries to root of $BIN_DIR if they extracted into a nested subfolder
+find "$BIN_DIR" -maxdepth 2 -type f \( -name "ffmpeg" -o -name "ffprobe" \) -exec mv -f {} "$BIN_DIR/" \; 2>/dev/null || true
+
+# Ensure executable permissions
+chmod +x "$BIN_DIR/ffmpeg" "$BIN_DIR/ffprobe" 2>/dev/null || true
+
+# 4. Prepend .bin to PATH for transparent subprocess resolution
+export PATH="$BIN_DIR:$PATH"
+export PYTHONUNBUFFERED=1
+
+# 5. Start your application
+exec python3 PixelVault.py
