@@ -218,3 +218,8 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+#Personal Stuff
+OLD
+.DS_Store
+workdir

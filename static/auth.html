@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FileVault | Authentication</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-page="auth">
+<canvas id="rain"></canvas>
+<div class="wrap">
+  <nav id="nav"></nav>
+
+  <!-- LOGIN -->
+  <section class="screen on" id="login">
+    <div class="authwrap">
+      <div class="neon"><div class="inner">
+        <h2>Log in</h2>
+        <label for="lu">Username</label><input type="text" id="lu" autocomplete="username">
+        <label for="lp">Password</label><input type="password" id="lp" autocomplete="current-password">
+        <div class="msg" id="lmsg"></div>
+        <button class="btn primary" id="loginButton" onclick="doLogin(this)">Log in</button>
+        <div class="swap">New here? <a onclick="show('signup')">Create an account</a></div>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- CREATE ACCOUNT -->
+  <section class="screen" id="signup">
+    <div class="authwrap">
+      <div class="neon"><div class="inner">
+        <h2>Create account</h2>
+        <label for="su">Choose a username</label><input type="text" id="su" autocomplete="username">
+        <label for="sp">Password</label><input type="password" id="sp" autocomplete="new-password">
+        <label for="sc">Confirm password</label><input type="password" id="sc" autocomplete="new-password">
+        <div class="msg" id="smsg"></div>
+        <button class="btn primary" id="registerButton" onclick="doSignup(this)">Sign up</button>
+        <div class="swap">Already have an account? <a onclick="show('login')">Log in</a></div>
+      </div></div>
+    </div>
+  </section>
+</div>
+
+<script src="/static/common.js"></script>
+<script src="/static/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FileVault | Dashboard</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-page="dashboard" data-tab="enc">
+<canvas id="rain"></canvas>
+<div class="wrap">
+  <nav id="nav"></nav>
+
+  <!-- ENCODE / DECODE WINDOW with slider -->
+  <section class="screen on" id="app">
+    <div class="slider" id="slider">
+      <div class="thumb"></div>
+      <button class="on" id="tabEnc" onclick="tab('enc')">Encode: file → video</button>
+      <button id="tabDec" onclick="tab('dec')">Decode: video → file</button>
+    </div>
+
+    <div class="card br">
+      <!-- encode -->
+      <div class="pane on" id="enc">
+        <div class="drop">
+          <label class="pick"><input type="file" id="encFile"><span class="choose">Choose File</span><span id="encName">No file chosen</span></label>
+          <small>&gt; Choose the file to hide in a video</small>
+        </div>
+        <div class="row3">
+          <div><label>Width</label><input type="number" id="w" value="1280"></div>
+          <div><label>Height</label><input type="number" id="h" value="720"></div>
+          <div><label>FPS</label><input type="number" id="fps" value="30"></div>
+        </div>
+        <div class="dropaudio drop">
+          <label class="pick"><input type="file" id="audioFile" accept="audio/*"><span class="choose">Choose Audio File</span><span id="audioName">No file chosen</span></label>
+          <small>&gt; Choose an audio file to add to the video (Optional, for fun)</small>
+        </div>
+        <div class="actions">
+          <!--<button class="btn sm" onclick="estimate()">Estimate size</button>-->
+          <button class="btn primary sm" onclick="createVideo()">Create video</button>
+        </div>
+        <div class="barmsg" id="encmsg"></div>
+        <div class="bar"><i id="encBar"></i></div>
+        <div class="hex" id="hex">00000000  -- choose a file to preview its bytes --</div>
+        <div class="info" id="encInfo"></div>
+      </div>
+
+      <!-- decode -->
+      <div class="pane" id="dec">
+        <div class="drop">
+          <label class="pick"><input type="file" id="decFile" accept="video/*,.mkv"><span class="choose">Choose File</span><span id="decName">No file chosen</span></label>
+          <small>&gt; Choose the video to extract the file from</small>
+        </div>
+        <div class="actions"><button class="btn primary sm" onclick="decodeVideo()">Decode video</button></div>
+        <div class="barmsg" id="decmsg"></div>
+        <div class="bar"><i id="decBar"></i></div>
+        <div class="card" style="background:#0c1a2d">
+          <div class="log" id="log">&gt; waiting for a video…</div>
+          <div class="info" id="decInfo" style="display:none">
+            <div><span>Recovered file</span><b id="rName">—</b></div>
+            <div><span>Size</span><b id="rSize">—</b></div>
+            <div><span>Frames read</span><b id="rFrames">—</b></div>
+            <button class="btn primary sm" style="margin-top:10px" onclick="alert('Hook this button to your decoder output to download the recovered file.')">Download file</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="/static/common.js"></script>
+<script src="/static/dashboard.js"></script>
+</body>
+</html>

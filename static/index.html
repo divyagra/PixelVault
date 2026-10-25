@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FileVault</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body data-page="home">
+<canvas id="rain"></canvas>
+<div class="wrap">
+  <nav id="nav"></nav>
+
+  <!-- HOME: only Login -->
+  <section class="screen on" id="home">
+    <div class="hero">
+      <div>
+        <div class="badge"><i></i>SECURE LINK ONLINE</div>
+        <h1><span class="glitch" data-text="Turn any file into a video">Turn any file into a video</span></h1>
+        <p>32 bits per pixel. Turn a file into frames, then turn it back into the exact same file, byte for byte.</p>
+        <a class="btn primary loginb" href="/auth">Login</a>
+      </div>
+      <div class="card pixels" id="pix"></div>
+    </div>
+
+    <div class="flow">
+      <div><svg width="34" height="44" viewBox="0 0 34 44" fill="none" stroke="#22e8ec" stroke-width="2"><path d="M3 2h20l8 8v32H3z"/><path d="M9 20h16M9 26h16M9 32h16"/></svg>FILE</div>
+      <div class="dots"></div>
+      <div><svg width="38" height="38" viewBox="0 0 38 38"><g fill="#22e8ec"><rect x="0" y="0" width="10" height="10"/><rect x="14" y="0" width="10" height="10" opacity=".6"/><rect x="28" y="0" width="10" height="10"/><rect x="0" y="14" width="10" height="10" opacity=".5"/><rect x="14" y="14" width="10" height="10" fill="#7a73a8"/><rect x="28" y="14" width="10" height="10"/><rect x="0" y="28" width="10" height="10"/><rect x="14" y="28" width="10" height="10" opacity=".7"/><rect x="28" y="28" width="10" height="10" opacity=".4"/></g></svg>PIXELS</div>
+      <div class="dots"></div>
+      <div><svg width="76" height="30" viewBox="0 0 76 30" fill="none" stroke="#22e8ec" stroke-width="2"><rect x="1" y="1" width="74" height="28" rx="2"/><g fill="#22e8ec"><rect x="7" y="7" width="12" height="16"/><rect x="23" y="7" width="12" height="16"/><rect x="39" y="7" width="12" height="16"/><rect x="55" y="7" width="12" height="16"/></g></svg>VIDEO</div>
+    </div>
+
+    <div class="ticker"><span>32 BITS/PX ▪ 0xDEADBEEF ▪ CRC32 VERIFIED ▪ 0x48656C6C6F ▪ 01000110 01001001 ▪ FRAME 0001 OK ▪ 32 BITS/PX ▪ 0xDEADBEEF ▪ CRC32 VERIFIED ▪ 0x48656C6C6F ▪ 01000110 01001001 ▪ FRAME 0001 OK ▪ </span></div>
+
+    <div class="stats">
+      <div class="card br stat"><strong>32</strong><span>bits per pixel</span></div>
+      <div class="card br stat"><strong>3.5 MB</strong><span>per 720p frame</span></div>
+      <div class="card br stat"><strong>Any</strong><span>file type</span></div>
+      <div class="card br stat"><strong>100%</strong><span>checksum verified</span></div>
+    </div>
+
+    <h3 class="sec">// how it works</h3>
+    <div class="steps3">
+      <div class="card"><h4>Read bytes</h4><p>Load the file and add a header.</p></div>
+      <div class="card"><h4>Paint pixels</h4><p>4 bytes in, 1 pixel out.</p></div>
+      <div class="card"><h4>Make video</h4><p>Frames become the video.</p></div>
+    </div>
+
+    <div class="card br cta">
+      <h4>Ready to turn a file into a video?</h4>
+      <a class="btn primary loginb" href="/auth">Login to get started</a>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS (shown on its own when the URL is index.html#how) -->
+  <section class="screen" id="how">
+    <h3 class="sec">// the core idea</h3>
+    <div class="card br">
+      <p style="font-size:12px;color:var(--muted);line-height:1.7">A file is a list of bytes. A video frame is a grid of pixels. Every 4 bytes of your file become exactly one pixel.</p>
+      <div class="bytes"><span>48</span><span>65</span><span>6C</span><span>6C</span></div>
+      <div style="font-size:11px;color:var(--muted)">4 bytes = 32 bits</div>
+    </div>
+    <div class="two">
+      <div class="card br"><h3 class="sec">// encoding</h3>
+        <div class="step"><em>1</em>Read the file as raw bytes.</div>
+        <div class="step"><em>2</em>Add a header: format tag, length, checksum, filename.</div>
+        <div class="step"><em>3</em>Group the bytes in fours, one pixel each.</div>
+        <div class="step"><em>4</em>Fill frames row by row. 1280 x 720 holds about 3.5 MB.</div>
+        <div class="step"><em>5</em>Pad the last frame and join all frames into a lossless video.</div>
+      </div>
+      <div class="card br"><h3 class="sec">// decoding</h3>
+        <div class="step"><em>1</em>Read every frame's pixels back into bytes.</div>
+        <div class="step"><em>2</em>Read the header for the real length and filename.</div>
+        <div class="step"><em>3</em>Remove the padding and check the checksum.</div>
+        <div class="step"><em>4</em>Rebuild the original file.</div>
+      </div>
+    </div>
+    <div class="card br"><h3 class="sec">// why lossless</h3>
+      <p style="font-size:12px;color:var(--muted);line-height:1.7">Normal video compression changes pixel values, which would corrupt the file. FileVault writes a lossless video, so every bit comes back exactly.</p>
+    </div>
+  </section>
+</div>
+
+<script src="/static/common.js"></script>
+<script src="/static/index.js"></script>
+</body>
+</html>
