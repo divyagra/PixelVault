@@ -66,13 +66,13 @@ function renderNav() {
 	const act = c => c ? 'active' : '';
 	const how = PAGE === 'home' && location.hash === '#how';
 	if (!user) {
-		nav.innerHTML = `<a class="logo" href="/">FileVault</a>
+		nav.innerHTML = `<a class="logo" href="/">PixelVault</a>
       <div class="links"><a class="${act(PAGE === 'home' && !how)}" href="/">Home</a>
       <a class="${act(how)}" href="/#how">How it works</a>
       <a class="btn outline sm" href="/auth">Login</a></div>`;
 	} else {
 		const tab = document.body.dataset.tab || 'enc';
-		nav.innerHTML = `<a class="logo" href="/dashboard">FileVault</a>
+		nav.innerHTML = `<a class="logo" href="/dashboard">PixelVault</a>
       <div class="links"><a class="${act(PAGE === 'dashboard' && tab === 'enc')}" href="/dashboard#enc">Encode</a>
       <a class="${act(PAGE === 'dashboard' && tab === 'dec')}" href="/dashboard#dec">Decode</a>
       <a class="${act(how)}" href="/#how">How it works</a>

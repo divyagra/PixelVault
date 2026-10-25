@@ -77,7 +77,7 @@ def decode(progress,path:Path,private_key):
     if raw is None:
         raise ValueError("File is empty")
     if raw[:4] != MAGIC:
-        raise PermissionError("Not a FileVault Video (Magic Byte Missing)")
+        raise PermissionError("Not a PixelVault Video (Magic Byte Missing)")
     progress(0.20,"Reading File")
     filenamelength = int.from_bytes(raw[4:8],"big")
     filename = raw[8:8+filenamelength].decode("utf-8")
